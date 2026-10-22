@@ -1,0 +1,31 @@
+###
+GET http://localhost:5049/catalog
+
+###
+GET http://localhost:5049/catalog/1
+
+###
+POST http://localhost:5049/catalog
+Content-Type: application/json
+
+{
+    "name": "Shoes",
+    "description": "Ohio State shoes",
+    "brand": "Nike",
+    "price": 129.99
+}
+
+###
+PUT http://localhost:5049/catalog/1
+Content-Type: application/json
+
+{
+  "id": 1,
+  "name": "Updated Shirt",
+  "description": "Updated Ohio State shirt",
+  "brand": "Nike",
+  "price": 39.99
+}
+
+###
+DELETE http://localhost:5049/catalog/1
