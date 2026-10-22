@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="Covert.Wrench.Api/Covert.Wrench.Api.csproj" />
+  <Project Path="Covert.Wrench.Domain/Covert.Wrench.Domain.csproj" />
+</Solution>
