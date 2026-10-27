@@ -3,8 +3,10 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.EntityFrameworkCore;
+using Covert.Wrench.Data;
 
-namespace jet.piranha.Api
+namespace Covert.Wrench.Api
 {
     public class Startup
     {
@@ -20,6 +22,9 @@ namespace jet.piranha.Api
             services.AddControllers();
             services.AddEndpointsApiExplorer();
             services.AddSwaggerGen();
+            services.AddDbContext<StoreContext>(options =>
+                options.UseSqlite("Data Source=../Registrar.sqlite",
+                b => b.MigrationsAssembly("Covert.Wrench.Api")));
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
