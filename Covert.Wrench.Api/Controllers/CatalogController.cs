@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Covert.Wrench.Domain.Catalog;
+using Covert.Wrench.Data;
 
 namespace Covert.Wrench.Api.Controllers
 {
@@ -10,13 +11,7 @@ namespace Covert.Wrench.Api.Controllers
         [HttpGet]
         public IActionResult GetItems()
         {
-            var items = new List<Item>()
-            {
-                new Item("Shirt", "Ohio State shirt.", "Nike", 29.99m),
-                new Item("Shorts", "Ohio State shorts.", "Nike", 44.99m)
-            };
-
-            return Ok(items);
+            return Ok(_db.Items);
         }
 
         [HttpGet("{id:int}")]
@@ -54,5 +49,12 @@ namespace Covert.Wrench.Api.Controllers
         {
             return NoContent();
         }    
+
+        private readonly StoreContext _db;
+
+        public CatalogController(StoreContext db)
+        {
+            _db = db;
+        }
     }
 }
