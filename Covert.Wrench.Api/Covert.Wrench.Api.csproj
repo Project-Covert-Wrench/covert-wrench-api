@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Covert.Wrench.Domain\Covert.Wrench.Domain.csproj" />
+    <ProjectReference Include="..\Covert.Wrench.Data\Covert.Wrench.Data.csproj" />
   </ItemGroup>
 
 </Project>
