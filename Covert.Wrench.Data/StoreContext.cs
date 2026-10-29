@@ -1,5 +1,4 @@
-﻿using System.Net.ServerSentEvents;
-using Covert.Wrench.Domain.Catalog;
+﻿using Covert.Wrench.Domain.Catalog;
 using Microsoft.EntityFrameworkCore;
 
 namespace Covert.Wrench.Data
@@ -10,5 +9,11 @@ namespace Covert.Wrench.Data
             : base(options)
         {    }
         public DbSet<Item> Items { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+            DbInitializer.Initialize(builder);
+        }
     }
 }
