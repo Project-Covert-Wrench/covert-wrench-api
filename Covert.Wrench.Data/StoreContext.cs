@@ -1,4 +1,5 @@
 ﻿using Covert.Wrench.Domain.Catalog;
+using Covert.Wrench.Domain.Orders;
 using Microsoft.EntityFrameworkCore;
 
 namespace Covert.Wrench.Data
@@ -9,6 +10,8 @@ namespace Covert.Wrench.Data
             : base(options)
         {    }
         public DbSet<Item> Items { get; set; }
+
+        public DbSet<Order> Orders { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
