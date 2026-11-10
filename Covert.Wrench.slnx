@@ -1,4 +1,7 @@
 <Solution>
+  <Folder Name="/tests/">
+    <Project Path="tests/Covert.Wrench.Domain.Tests/Covert.Wrench.Domain.Tests.csproj" />
+  </Folder>
   <Project Path="Covert.Wrench.Api/Covert.Wrench.Api.csproj" />
   <Project Path="Covert.Wrench.Data/Covert.Wrench.Data.csproj" />
   <Project Path="Covert.Wrench.Domain/Covert.Wrench.Domain.csproj" />
