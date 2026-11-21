@@ -28,4 +28,20 @@ Content-Type: application/json
 }
 
 ###
-DELETE http://localhost:5049/catalog/1
+DELETE http://localhost:5049/catalog/3
+
+###
+curl --request POST \
+  --url https://dev-tpa1mxmf2dcgbi2h.us.auth0.com/oauth/token \
+  --header 'content-type: application/json' \
+  --data '{
+    "client_id":"QXDw98sbSs1ZBksNCarGcaA7goCDtehs",
+    "client_secret":"GBh_yzHGdkMMOzJIA3m3NKzGRNtPw3pp0W_7LHEWWI6gzQWn3NQ-Bl6TiRbTZinl",
+    "audience":"https://covert-wrench",
+    "grant_type":"client_credentials"
+  }'
+
+###
+curl --request DELETE \
+  --url http://localhost:5049/catalog/3 \
+  --header 'authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IjlMRF82d1AzbWxFcmt2QkhFengwTCJ9.eyJpc3MiOiJodHRwczovL2Rldi10cGExbXhtZjJkY2diaTJoLnVzLmF1dGgwLmNvbS8iLCJzdWIiOiJRWER3OThzYlNzMVpCa3NOQ2FyR2NhQTdnb0NEdGVoc0BjbGllbnRzIiwiYXVkIjoiaHR0cHM6Ly9jb3ZlcnQtd3JlbmNoIiwiaWF0IjoxNzk1MjMwNjY4LCJleHAiOjE3OTUzMTcwNjgsInNjb3BlIjoiZGVsZXRlOmNhdGFsb2ciLCJndHkiOiJjbGllbnQtY3JlZGVudGlhbHMiLCJhenAiOiJRWER3OThzYlNzMVpCa3NOQ2FyR2NhQTdnb0NEdGVocyJ9.ZJN-ot3ngEVdFL-qtJai7gxdmKi6k5MHMfDldOtNMNE3A7w13JqaEjaFyrNKhafTKUG2CGTZfIPxo4c1duacqPFunVPPDwaGzDMAadibTM5-3zHYpgGHpn5ifC2xTBLKlbbGbaeJcC9FMY4OepHHjYuih0nwDsoyqbRlhOQIfKwWmlIPMV2aGtVMsgnjlcSgzjApJxxpOsI89ROKsxSuxx22s_bmgr2uOeLhDGyV7ZXRQ5zh06pSX8aMnWeE8e3NF2AYDq9fSAEONom4Cv2MTs0TDfa3nB2HAxBDyFX0SRSsbv3JodYaR6JPRjbhzZVnAO5JK5liWkNNp8w_sVz0HA'

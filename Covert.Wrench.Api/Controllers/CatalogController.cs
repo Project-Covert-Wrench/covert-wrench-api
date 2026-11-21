@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Covert.Wrench.Domain.Catalog;
 using Covert.Wrench.Data;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Covert.Wrench.Api.Controllers
 {
@@ -72,6 +73,7 @@ namespace Covert.Wrench.Api.Controllers
         
         
         [HttpDelete("{id:int}")]
+        [Authorize("delete:catalog")]
         public IActionResult Delete(int id)
         {
             var item = _db.Items.Find(id);

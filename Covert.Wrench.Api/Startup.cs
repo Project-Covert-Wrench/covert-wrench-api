@@ -5,7 +5,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Covert.Wrench.Data;
-using Microsoft.Build.Framework;
+using Microsoft.AspNetCore.Authorization;
+using Covert.Wrench.Api.Security;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace Covert.Wrench.Api
 {
@@ -20,7 +22,35 @@ namespace Covert.Wrench.Api
 
         public void ConfigureServices(IServiceCollection services)
         {
+            string authority = Configuration["Auth0:Authority"] ??
+                throw new ArgumentNullException("Auth0:Authority");
+            
+            string audience = Configuration["Auth0:Audience"] ??
+                throw new ArgumentNullException("Auth0:Audience");
+
             services.AddControllers();
+
+            services.AddAuthentication(options =>
+                {
+                    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                })
+                .AddJwtBearer(options =>
+                {
+                    options.Authority = authority;
+                    options.Audience = audience;
+                });
+            
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("delete:catalog", policy =>
+                policy.Requirements.Add(
+                    new HasScopeRequirements("delete:catalog", authority)
+                ));
+            });
+
+            services.AddSingleton<IAuthorizationHandler, HasScopeHandler>();
+
             services.AddEndpointsApiExplorer();
             services.AddSwaggerGen();
             services.AddDbContext<StoreContext>(options =>
@@ -51,6 +81,8 @@ namespace Covert.Wrench.Api
             app.UseRouting();
 
             app.UseCors();
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 
