@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Covert.Wrench.Data;
+using Microsoft.Build.Framework;
 
 namespace Covert.Wrench.Api
 {
@@ -25,6 +26,15 @@ namespace Covert.Wrench.Api
             services.AddDbContext<StoreContext>(options =>
                 options.UseSqlite("Data Source=../Registrar.sqlite",
                 b => b.MigrationsAssembly("Covert.Wrench.Api")));
+            services.AddCors(options =>
+            {
+               options.AddDefaultPolicy(policyBuilder =>
+               {
+                   policyBuilder.WithOrigins("http://localhost:3000")
+                    .AllowAnyHeader()
+                    .AllowAnyMethod();
+               });
+            });
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -39,6 +49,8 @@ namespace Covert.Wrench.Api
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseCors();
 
             app.UseAuthorization();
 
